@@ -80,7 +80,7 @@ $$ t = \frac{(20.7-17.0) - 0}{7.61\sqrt{\frac{1}{30}+\frac{1}{30}}} = 1.88$$
 The p-value is 
 $$P = 2 * P(T_58 > 1.88) = 2*0.03235 = 0.0647 $$
 
-Since our p-value is greater than our $\alpha = 0.5$ then we conclude to fail to reject the null hypothesis.
+Since our p-value is greater than our $\alpha = 0.5$ then we fail to reject the null hypothesis. Hence, we can't say if one delivery method is better than the other.
 
 If we use t.test R function we can see the results are similar.
 
@@ -124,11 +124,11 @@ p <- 2*pt(t,m+n-2,lower.tail = FALSE)
 ```
 
 t.test 
-```{r, echo=TRUE}
+```{r, echo=TRUE, results="hide"}
 supps.values <- ToothGrowth %>% group_by(supp)
 oj <- (supps.values %>% filter(supp=="OJ"))$len
 vc <- (supps.values %>% filter(supp=="VC"))$len
 
-t.test
+t.test(oj, vc, paired = FALSE, var.equal = TRUE)
 ```
 
